@@ -50,7 +50,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.security.SecurityMiddleware',
 )
 
-ROOT_URLCONF = 'django_uikit_admin.urls'
+ROOT_URLCONF = 'django-uikit-admin.urls'
 
 TEMPLATES = [
     {
