@@ -55,3 +55,8 @@ docs/_build/
 
 # PyBuilder
 target/
+.idea
+Vagrantfile
+.vagrant
+db.sqlite3
+.DS_Store
