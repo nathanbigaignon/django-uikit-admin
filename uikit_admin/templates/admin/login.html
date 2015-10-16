@@ -41,32 +41,19 @@
             <div id="content-main" class="uk-margin-large-top">
                 <form action="{{ app_path }}" method="post" id="login-form"
                       class="uk-form uk-form-stacked">{% csrf_token %}
-                    <div class="uk-form-row">
-                        {{ form.username.errors }}
-                        <label class="uk-form-label"
-                               for="{{ form.username.id_for_label }}">{{ form.username.label }}</label>
 
-                        <div class="uk-form-controls">{{ form.username }}</div>
-                    </div>
-                    <div class="uk-form-row">
-                        {{ form.password.errors }}
-                        <label class="uk-form-label"
-                               for="{{ form.password.id_for_label }}">{{ form.password.label }}</label>
+                    {{ form.username|uka_form_row_stacked:"uk-width-1-1" }}
+                    {{ form.password|uka_form_row_stacked:"uk-width-1-1" }}
 
-                        <div class="uk-form-controls">{{ form.password }}</div>
-                        <input type="hidden" name="next" value="{{ next }}"/>
-                    </div>
                     {% url 'admin_password_reset' as password_reset_url %}
                     {% if password_reset_url %}
                         <div class="password-reset-link">
                             <a href="{{ password_reset_url }}">{% trans 'Forgotten your password or username?' %}</a>
                         </div>
                     {% endif %}
-                    <div class="uk-form-row">
-                        <div class="uk-form-controls">
-                            <button class="uk-button uk-width-1-1">{% trans 'Log in' %}</button>
-                        </div>
-                    </div>
+
+                    {% trans 'Log in' as text_log_in %}
+                    {{ form|uka_form_row_stacked_button:text_log_in }}
                 </form>
 
                 <script type="text/javascript">
