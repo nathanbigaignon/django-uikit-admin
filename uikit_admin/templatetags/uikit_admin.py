@@ -14,7 +14,7 @@ def uka_form_row_stacked(element, classes=None):
     return html
 
 
-@register.filter
+@register.simple_tag
 def uka_form_row_stacked_button(text, classes=None):
     if classes is None:
         classes = ''
