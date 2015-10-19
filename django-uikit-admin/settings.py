@@ -37,7 +37,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'uikit_admin'
+    'uikit_admin',
 )
 
 MIDDLEWARE_CLASSES = (
