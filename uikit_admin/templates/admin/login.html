@@ -42,8 +42,9 @@
                 <form action="{{ app_path }}" method="post" id="login-form"
                       class="uk-form uk-form-stacked">{% csrf_token %}
 
-                    {{ form.username|uka_form_row_stacked:"uk-width-1-1" }}
-                    {{ form.password|uka_form_row_stacked:"uk-width-1-1" }}
+                    {% uka_form_row_stacked form.username form.username.errors "uk-width-1-1" %}
+
+                    {% uka_form_row_stacked form.password form.password.errors "uk-width-1-1" %}
 
                     {% url 'admin_password_reset' as password_reset_url %}
                     {% if password_reset_url %}

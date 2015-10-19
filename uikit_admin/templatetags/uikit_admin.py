@@ -5,12 +5,16 @@ from django.utils.html import format_html
 register = template.Library()
 
 
-@register.filter
-def uka_form_row_stacked(element, classes=None):
+@register.simple_tag
+def uka_form_row_stacked(element, errors='', classes=''):
     label = BoundField.label_tag(element, "", {'class': 'uk-form-label'})
-    if classes is not None:
-        element = element.as_widget(attrs={'class': classes})
-    html = format_html('<div class="uk-form-row">{}<div class="uk-form-row">{}</div></div>', label, element)
+    if errors:
+        classes_tmp = classes + ' uk-form-danger'
+        classes = classes_tmp
+    element = element.as_widget(attrs={'class': classes})
+    html_error = format_html('<div class="uk-text-danger uk-margin-top">{}</div>', errors)
+    html = format_html(
+        '<div class="uk-form-row">{}<div class="uk-form-row">{}</div>{}</div>', label, element, html_error)
     return html
 
 
