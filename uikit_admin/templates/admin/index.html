@@ -10,10 +10,10 @@
 
 {% block breadcrumbs %}{% endblock %}
 
-
+{% block content_title %}{% endblock %}
 {% block content %}
     <div class="uk-grid">
-    <div class="uk-width-3-10">
+    <div class="uk-width-3-10 uk-margin-large-top">
         {% if app_list %}
             {% for app in app_list %}
                 <div class="uk-panel-box">
@@ -22,9 +22,9 @@
                            title="{% blocktrans with name=app.name %}Models in the {{ name }} application{% endblocktrans %}">{{ app.name }}</a>
                     </h3>
 
-                    <ul class="uk-list">
+                    <ul class="uk-list uk-list-line">
                         {% for model in app.models %}
-                            <li class="margin-list">
+                            <li>
                                 <div class="uk-grid">
                                     <div class="uk-width-1-2">
                                         {% if model.admin_url %}
@@ -66,8 +66,8 @@
     </div>
 {% endblock %}
 {% block sidebar %}
-    <div class="uk-width-3-10"></div>
-    <div class="uk-width-4-10">
+    <div class="uk-width-3-10 uk-margin-large-top"></div>
+    <div class="uk-width-4-10 uk-margin-large-top">
         <div class="uk-panel-box">
             <h2>{% trans 'Recent Actions' %}</h2>
 
