@@ -1,7 +1,8 @@
 {% extends "admin/base_site.html" %}
 {% load i18n admin_static %}
 
-{% block extrastyle %}{{ block.super }}<!--<link rel="stylesheet" type="text/css" href="{% static "admin/css/dashboard.css" %}" /> -->{% endblock %}
+{% block extrastyle %}{{ block.super }}
+    <link rel="stylesheet" type="text/css" href="{% static "admin/css/index.css" %}"/>{% endblock %}
 
 {% block coltype %}colMS{% endblock %}
 
@@ -9,9 +10,10 @@
 
 {% block breadcrumbs %}{% endblock %}
 
+
 {% block content %}
     <div class="uk-grid">
-    <div class="uk-width-1-2">
+    <div class="uk-width-3-10">
         {% if app_list %}
             {% for app in app_list %}
                 <div class="uk-panel-box">
@@ -19,35 +21,43 @@
                         <a href="{{ app.app_url }}" class="section"
                            title="{% blocktrans with name=app.name %}Models in the {{ name }} application{% endblocktrans %}">{{ app.name }}</a>
                     </h3>
-                    <table class="uk-table">
+
+                    <ul class="uk-list">
                         {% for model in app.models %}
-                            <tr>
-                                {% if model.admin_url %}
-                                    <th scope="row"><a href="{{ model.admin_url }}">{{ model.name }}</a></th>
-                                {% else %}
-                                    <th scope="row">{{ model.name }}</th>
-                                {% endif %}
-
-                                <td>
-                                    <div class="uk-button-group">
-                                        {% if model.add_url %}
-                                            <a href="{{ model.add_url }}"
-                                               class="uk-button uk-button-primary uk-button-small">{% trans 'Add' %}</a>
-                                        {% else %}
-                                            <td>&nbsp;</td>
-                                        {% endif %}
-
+                            <li class="margin-list">
+                                <div class="uk-grid">
+                                    <div class="uk-width-1-2">
                                         {% if model.admin_url %}
-                                            <a href="{{ model.admin_url }}"
-                                               class="uk-button uk-button-primary uk-button-small">{% trans 'Change' %}</a>
+                                            <a href="{{ model.admin_url }}">{{ model.name }}</a>
                                         {% else %}
-                                            <td>&nbsp;</td>
+                                            {{ model.name }}
                                         {% endif %}
                                     </div>
-                                </td>
-                            </tr>
+                                    <div class="uk-width-1-2">
+                                        <div class="uk-button-group">
+                                            {% if model.add_url %}
+                                                <a href="{{ model.add_url }}" alt="{% trans 'Add' %}"
+                                                   title="{% trans 'Add' %}"
+                                                   class="uk-button uk-button-small"><i
+                                                        class="uk-icon-plus uk-icon-small"></i></a>
+                                            {% else %}
+                                                &nbsp;
+                                            {% endif %}
+
+                                            {% if model.admin_url %}
+                                                <a href="{{ model.admin_url }}" alt="{% trans 'Change' %}"
+                                                   title="{% trans 'Change' %}"
+                                                   class="uk-button uk-button-small"><i
+                                                        class="uk-icon-edit uk-icon-small"></i></a>
+                                            {% else %}
+                                                &nbsp;
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
                         {% endfor %}
-                    </table>
+                    </ul>
                 </div>
             {% endfor %}
         {% else %}
@@ -55,39 +65,38 @@
         {% endif %}
     </div>
 {% endblock %}
-</div>
-<div class="uk-width-1-2">
-    {% block sidebar %}
-        <div id="content-related">
-            <div class="module" id="recent-actions-module">
-                <h2>{% trans 'Recent Actions' %}</h2>
+{% block sidebar %}
+    <div class="uk-width-3-10"></div>
+    <div class="uk-width-4-10">
+        <div class="uk-panel-box">
+            <h2>{% trans 'Recent Actions' %}</h2>
 
-                <h3>{% trans 'My Actions' %}</h3>
-                {% load log %}
-                {% get_admin_log 10 as admin_log for_user user %}
-                {% if not admin_log %}
-                    <p>{% trans 'None available' %}</p>
-                {% else %}
-                    <ul class="actionlist">
-                        {% for entry in admin_log %}
-                            <li class="{% if entry.is_addition %}addlink{% endif %}{% if entry.is_change %}changelink{% endif %}{% if entry.is_deletion %}deletelink{% endif %}">
-                                {% if entry.is_deletion or not entry.get_admin_url %}
-                                    {{ entry.object_repr }}
-                                {% else %}
-                                    <a href="{{ entry.get_admin_url }}">{{ entry.object_repr }}</a>
-                                {% endif %}
-                                <br/>
-                                {% if entry.content_type %}
-                                    <span class="mini quiet">{% filter capfirst %}
-                                        {{ entry.content_type }}{% endfilter %}</span>
-                                {% else %}
-                                    <span class="mini quiet">{% trans 'Unknown content' %}</span>
-                                {% endif %}
-                            </li>
-                        {% endfor %}
-                    </ul>
-                {% endif %}
-            </div>
+            <h3>{% trans 'My Actions' %}</h3>
+            {% load log %}
+            {% get_admin_log 10 as admin_log for_user user %}
+            {% if not admin_log %}
+                <p>{% trans 'None available' %}</p>
+            {% else %}
+                <ul class="uk-list">
+                    {% for entry in admin_log %}
+                        <li class="{% if entry.is_addition %}addlink{% endif %}{% if entry.is_change %}changelink{% endif %}{% if entry.is_deletion %}deletelink{% endif %}">
+                            {% if entry.is_deletion or not entry.get_admin_url %}
+                                {{ entry.object_repr }}
+                            {% else %}
+                                <a href="{{ entry.get_admin_url }}">{{ entry.object_repr }}</a>
+                            {% endif %}
+                            <br/>
+                            {% if entry.content_type %}
+                                <span class="mini quiet">{% filter capfirst %}
+                                    {{ entry.content_type }}{% endfilter %}</span>
+                            {% else %}
+                                <span class="mini quiet">{% trans 'Unknown content' %}</span>
+                            {% endif %}
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
         </div>
-        </div>
-    {% endblock %}
+    </div>
+{% endblock %}
+</div>
