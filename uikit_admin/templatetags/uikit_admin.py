@@ -26,3 +26,17 @@ def uka_form_row_stacked_button(text, classes=None):
         '<div class="uk-form-row"><div class="uk-form-row"><button class="uk-button {}">{}</button></div></div>',
         classes, text)
     return html
+
+
+@register.simple_tag
+def uka_button(text, classes=None, type=None, name=None):
+    if classes is None:
+        classes = ''
+    if type is None:
+        type = ''
+    if name is None:
+        name = ''
+    html = format_html(
+        '<button class="uk-button {}" type="{}" name="{}">{}</button>',
+        classes, type, name, text)
+    return html
