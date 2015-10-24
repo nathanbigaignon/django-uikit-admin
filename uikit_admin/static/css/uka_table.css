@@ -1,0 +1,10 @@
+.uka_table {
+    border: 1px solid #ddd;
+}
+.uka_table thead th a {
+    color: #666;
+}
+
+.uka_table thead th:not(:first-child), .uka_table tbody td:not(:first-child), .uka_table tbody th:not(:first-child) {
+    border-left: 1px solid #ddd;
+}
