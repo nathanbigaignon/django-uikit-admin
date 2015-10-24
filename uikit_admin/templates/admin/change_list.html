@@ -2,6 +2,7 @@
 {% load i18n admin_urls admin_static admin_list %}
 
 {% block extrastyle %}
+    <link rel="stylesheet" type="text/css" href="{% static "css/uka_table.css" %}"/>
     {{ block.super }}
     <!--<link rel="stylesheet" type="text/css" href="{% static "admin/css/changelists.css" %}"/>-->
     {% if cl.formset %}
