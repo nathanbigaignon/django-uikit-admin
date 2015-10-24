@@ -73,32 +73,34 @@
             </p>
             {{ cl.formset.non_form_errors }}
         {% endif %}
-        <div class="module{% if cl.has_filters %} filtered{% endif %}" id="changelist">
-            {% block search %}{% search_form cl %}{% endblock %}
-            {% block date_hierarchy %}{% date_hierarchy cl %}{% endblock %}
+        <div class="uk-grid">
+            <div class="module{% if cl.has_filters %} filtered{% endif %} uk-width-8-10" id="changelist">
+                {% block search %}{% search_form cl %}{% endblock %}
+                {% block date_hierarchy %}{% date_hierarchy cl %}{% endblock %}
 
+                <form id="changelist-form" action="" method="post"{% if cl.formset.is_multipart %}
+                      enctype="multipart/form-data"{% endif %} novalidate class="uk-form">{% csrf_token %}
+                    {% if cl.formset %}
+                        <div>{{ cl.formset.management_form }}</div>
+                    {% endif %}
+
+                    {% block result_list %}
+                        {% if action_form and actions_on_top and cl.show_admin_actions %}{% admin_actions %}{% endif %}
+                        {% result_list cl %}
+                        {% if action_form and actions_on_bottom and cl.show_admin_actions %}
+                            {% admin_actions %}{% endif %}
+                    {% endblock %}
+                    {% block pagination %}{% pagination cl %}{% endblock %}
+                </form>
+            </div>
             {% block filters %}
                 {% if cl.has_filters %}
-                    <div id="changelist-filter">
+                    <div id="changelist-filter" class="uk-width-2-10">
                         <h2>{% trans 'Filter' %}</h2>
                         {% for spec in cl.filter_specs %}{% admin_list_filter cl spec %}{% endfor %}
                     </div>
                 {% endif %}
             {% endblock %}
-
-            <form id="changelist-form" action="" method="post"{% if cl.formset.is_multipart %}
-                  enctype="multipart/form-data"{% endif %} novalidate class="uk-form">{% csrf_token %}
-                {% if cl.formset %}
-                    <div>{{ cl.formset.management_form }}</div>
-                {% endif %}
-
-                {% block result_list %}
-                    {% if action_form and actions_on_top and cl.show_admin_actions %}{% admin_actions %}{% endif %}
-                    {% result_list cl %}
-                    {% if action_form and actions_on_bottom and cl.show_admin_actions %}{% admin_actions %}{% endif %}
-                {% endblock %}
-                {% block pagination %}{% pagination cl %}{% endblock %}
-            </form>
         </div>
     </div>
 {% endblock %}
