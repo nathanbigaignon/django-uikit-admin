@@ -94,9 +94,11 @@
         <div class="uk-width-9-10 uk-container-center">
             {% block messages %}
                 {% if messages %}
-                    <ul class="messagelist">{% for message in messages %}
-                        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message|capfirst }}</li>
-                    {% endfor %}</ul>
+                    {% for message in messages %}
+                        <div class="uk-alert uk-alert-{{ message.tags }} uk-margin-top">
+                            <p>{{ message|capfirst }}</p>
+                        </div>
+                    {% endfor %}
                 {% endif %}
             {% endblock messages %}
 
