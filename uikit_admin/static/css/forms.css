@@ -16,3 +16,15 @@ fieldset.collapsed .uk-panel-title {
     border-bottom: none;
     margin: 0;
 }
+
+.empty-form {
+    display: none;
+}
+
+.add-row {
+    background: none !important;
+}
+
+.add-row td {
+    border-bottom: none !important;
+}
