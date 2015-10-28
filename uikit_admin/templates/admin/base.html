@@ -80,18 +80,20 @@
             {% block nav-global %}{% endblock %}
         </div>
         <!-- END Header -->
-        {% block breadcrumbs %}
-            <ul class="uk-breadcrumb">
-                <li><a href="{% url 'admin:index' %}">{% trans 'Home' %}</a></li>
-                {% if title %}
-                    <li class="uk-active"><span>{{ title }}</span></li>
-                {% endif %}
-            </ul>
-        {% endblock %}
     {% endif %}
 
     <div class="uk-grid">
-        <div class="uk-width-9-10 uk-container-center">
+        <div class="uk-width-9-10 uk-container-center uk-margin-top">
+            {% if not is_popup %}
+                    {% block breadcrumbs %}
+                        <ul class="uk-breadcrumb">
+                            <li><a href="{% url 'admin:index' %}">{% trans 'Home' %}</a></li>
+                            {% if title %}
+                                <li class="uk-active"><span>{{ title }}</span></li>
+                            {% endif %}
+                        </ul>
+                    {% endblock %}
+            {% endif %}
             {% block messages %}
                 {% if messages %}
                     {% for message in messages %}

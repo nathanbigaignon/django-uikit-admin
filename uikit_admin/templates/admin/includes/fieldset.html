@@ -18,7 +18,7 @@
                         {% if field.is_readonly %}
                             <p>{{ field.contents }}</p>
                         {% else %}
-                            {% uka_form_row_stacked field.field '' "uk-width-1-3" %}
+                            {% uka_form_row_stacked field.field '' "uk-form-width-large" %}
                         {% endif %}
                     {% endif %}
                     {% if field.field.help_text %}
@@ -26,7 +26,6 @@
                     {% endif %}
                     {% if line.fields|length_is:'1' %}
                         <div class="uk-text-danger">{{ line.errors }}</div>{% endif %}
-
                 </div>
             {% endfor %}
         </div>
