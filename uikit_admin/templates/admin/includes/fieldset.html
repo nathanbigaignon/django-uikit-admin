@@ -1,34 +1,36 @@
 {% load uikit_admin %}
-<fieldset class="module aligned {{ fieldset.classes }}">
-    {% if fieldset.name %}<h2>{{ fieldset.name }}</h2>{% endif %}
-    {% if fieldset.description %}
-        <div class="description">{{ fieldset.description|safe }}</div>
-    {% endif %}
-    {% for line in fieldset %}
-        <div class="form-row{% if line.fields|length_is:'1' and line.errors %} errors{% endif %}{% if not line.has_visible_field %} hidden{% endif %}{% for field in line %}{% if field.field.name %} field-{{ field.field.name }}{% endif %}{% endfor %}">
-        <div class="uk-form-row">
-            {% for field in line %}
-                <div{% if not line.fields|length_is:'1' %}
-                    class="field-box{% if field.field.name %} field-{{ field.field.name }}{% endif %}{% if not field.is_readonly and field.errors %} errors{% endif %}{% if field.field.is_hidden %} hidden{% endif %}"{% elif field.is_checkbox %}
-                    class="checkbox-row"{% endif %}>
-                    {% if not line.fields|length_is:'1' and not field.is_readonly %}{{ field.errors }}{% endif %}
-                    {% if field.is_checkbox %}
-                        {{ field.field }}<span class="uk-form-help-inline">{{ field.field.label }}</span>
-                    {% else %}
-                        {% if field.is_readonly %}
-                            <p>{{ field.contents }}</p>
+<div class="uk-panel uk-panel-header uk-panel-box uk-panel-box-secondary uk-margin-bottom">
+    <fieldset class="module aligned {{ fieldset.classes }}">
+        {% if fieldset.name %}<h2 class="uk-panel-title">{{ fieldset.name }}</h2>{% endif %}
+        {% if fieldset.description %}
+            <div class="description">{{ fieldset.description|safe }}</div>
+        {% endif %}
+        {% for line in fieldset %}
+            <div class="form-row{% if line.fields|length_is:'1' and line.errors %} errors{% endif %}{% if not line.has_visible_field %} hidden{% endif %}{% for field in line %}{% if field.field.name %} field-{{ field.field.name }}{% endif %}{% endfor %}">
+            <div class="uk-form-row">
+                {% for field in line %}
+                    <div{% if not line.fields|length_is:'1' %}
+                        class="field-box{% if field.field.name %} field-{{ field.field.name }}{% endif %}{% if not field.is_readonly and field.errors %} errors{% endif %}{% if field.field.is_hidden %} hidden{% endif %}"{% elif field.is_checkbox %}
+                        class="checkbox-row"{% endif %}>
+                        {% if not line.fields|length_is:'1' and not field.is_readonly %}{{ field.errors }}{% endif %}
+                        {% if field.is_checkbox %}
+                            {{ field.field }}<span class="uk-form-help-inline">{{ field.field.label }}</span>
                         {% else %}
-                            {% uka_form_row_stacked field.field '' "uk-width-1-3" %}
+                            {% if field.is_readonly %}
+                                <p>{{ field.contents }}</p>
+                            {% else %}
+                                {% uka_form_row_stacked field.field '' "uk-width-1-3" %}
+                            {% endif %}
                         {% endif %}
-                    {% endif %}
-                    {% if field.field.help_text %}
-                        <p class="uk-text-small uk-margin-top-remove">{{ field.field.help_text|safe }}</p>
-                    {% endif %}
-                    {% if line.fields|length_is:'1' %}
-                        <div class="uk-text-danger">{{ line.errors }}</div>{% endif %}
+                        {% if field.field.help_text %}
+                            <p class="uk-text-small uk-margin-top-remove">{{ field.field.help_text|safe }}</p>
+                        {% endif %}
+                        {% if line.fields|length_is:'1' %}
+                            <div class="uk-text-danger">{{ line.errors }}</div>{% endif %}
 
-                </div>
-            {% endfor %}
-        </div>
-    {% endfor %}
-</fieldset>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endfor %}
+    </fieldset>
+</div>
