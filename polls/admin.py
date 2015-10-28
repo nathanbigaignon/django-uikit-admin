@@ -1,12 +1,21 @@
 from django.contrib import admin
 
-from .models import Question
+from .models import Choice, Question
+
+
+# admin.TabularInline
+# admin.StackedInline
+class ChoiceInline(admin.TabularInline):
+    model = Choice
+    extra = 3
 
 
 class QuestionAdmin(admin.ModelAdmin):
     fieldsets = [
-        ('cool',               {'fields': ['question_text_one', 'question_text_two']}),
-        ('Date information', {'fields': ['question_text_three', 'question_text_four', 'question_text_five', 'confirmation', 'second_confirmation', 'test_file']}),
+        (None, {'fields': ['question_text']}),
+        ('Date information', {'fields': ['pub_date'], 'classes': ['collapse']}),
     ]
+    inlines = [ChoiceInline]
+
 
 admin.site.register(Question, QuestionAdmin)
