@@ -18,14 +18,14 @@
                         {% else %}
                             {% uka_form_row_stacked field.field '' "uk-form-width-large" %}
                         {% endif %}
-                    {% endif %}
-                    {% if field.field.help_text %}
-                        <p class="uk-text-small uk-margin-top-remove">{{ field.field.help_text|safe }}</p>
-                    {% endif %}
-                    {% if line.fields|length_is:'1' %}
-                        <div class="uk-text-danger">{{ line.errors }}</div>{% endif %}
-                </div>
-            {% endfor %}
-        </div>
-    {% endfor %}
-</fieldset>
+                        {% if field.field.help_text %}
+                            <p class="uk-text-small uk-margin-top-remove">{{ field.field.help_text|safe }}</p>
+                        {% endif %}
+                        {% if line.fields|length_is:'1' %}
+                            <div class="uk-text-danger">{{ line.errors }}</div>{% endif %}
+                    </div>
+                {% endfor %}
+            </div>
+        {% endfor %}
+    </fieldset>
+</div>
