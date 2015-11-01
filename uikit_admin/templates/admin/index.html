@@ -87,18 +87,21 @@
             {% else %}
                 <ul class="uk-list">
                     {% for entry in admin_log %}
-                        <li class="{% if entry.is_addition %}addlink{% endif %}{% if entry.is_change %}changelink{% endif %}{% if entry.is_deletion %}deletelink{% endif %}">
+                        <li class="uk-list">
+                            {% if entry.is_addition %}<span class="uk-icon-plus" style="color: #6fac34;"></span>{% endif %}
+                            {% if entry.is_change %}<span class="uk-icon-edit"></span>{% endif %}
+                            {% if entry.is_deletion %}<span class="uk-icon-remove" style="color: #da314b;"></span>{% endif %}
                             {% if entry.is_deletion or not entry.get_admin_url %}
-                                {{ entry.object_repr }}
+                                <span class="uk-text-bold">{{ entry.object_repr }}</span>
                             {% else %}
-                                <a href="{{ entry.get_admin_url }}">{{ entry.object_repr }}</a>
+                                <a class="uk-text-bold" href="{{ entry.get_admin_url }}">{{ entry.object_repr }}</a>
                             {% endif %}
                             <br/>
                             {% if entry.content_type %}
-                                <span class="mini quiet">{% filter capfirst %}
+                                <span class="uk-text-muted">{% filter capfirst %}
                                     {{ entry.content_type }}{% endfilter %}</span>
                             {% else %}
-                                <span class="mini quiet">{% trans 'Unknown content' %}</span>
+                                <span class="uk-text-muted">{% trans 'Unknown content' %}</span>
                             {% endif %}
                         </li>
                     {% endfor %}
