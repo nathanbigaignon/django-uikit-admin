@@ -4,15 +4,12 @@
 {% block bodyclass %}{{ block.super }} app-{{ app_label }}{% endblock %}
 
 {% if not is_popup %}
-{% block breadcrumbs %}
-<div class="breadcrumbs">
-<a href="{% url 'admin:index' %}">{% trans 'Home' %}</a>
-&rsaquo;
-{% for app in app_list %}
-{{ app.name }}
-{% endfor %}
-</div>
-{% endblock %}
+    {% block breadcrumbs %}
+        <ul class="uk-breadcrumb">
+            <li><a href="{% url 'admin:index' %}">{% trans 'Home' %}</a></li>
+            {% for app in app_list %}
+                <li>{{ app.name }}</li>
+            {% endfor %}
+        </ul>
+    {% endblock %}
 {% endif %}
-
-{% block sidebar %}{% endblock %}

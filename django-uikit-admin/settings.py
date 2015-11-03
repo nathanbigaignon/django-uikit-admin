@@ -57,6 +57,7 @@ ROOT_URLCONF = 'django-uikit-admin.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        # 'DIRS': [],
         'DIRS': [os.path.join(BASE_DIR, 'uikit_admin/templates')],
         'APP_DIRS': True,
         'OPTIONS': {
