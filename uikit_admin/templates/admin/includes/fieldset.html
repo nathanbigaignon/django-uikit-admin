@@ -17,7 +17,7 @@
                             <label>{{ field.field }}<span
                                     class="uk-form-help-inline">{{ field.field.label }}</span></label>
                         {% else %}
-                            {% uka_form_row_stacked field.field field.field.errors "uk-width-1-3" %}
+                            {% uka_form_row_stacked field.field field.field.errors "uk-form-width-large" %}
                         {% endif %}
                         {% if field.field.help_text %}
                             <p class="uk-text-small uk-margin-top-remove">{{ field.field.help_text|safe }}</p>
