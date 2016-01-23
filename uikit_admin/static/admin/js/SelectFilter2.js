@@ -59,7 +59,7 @@ window.SelectFilter = {
 
         selector_available.appendChild(from_box);
         var choose_all = quickElement('a', selector_available, gettext('Choose all'), 'title', interpolate(gettext('Click to choose all %s at once.'), [field_name]), 'href', 'javascript: (function(){ SelectBox.move_all("' + field_id + '_from", "' + field_id + '_to"); SelectFilter.refresh_icons("' + field_id + '");})()', 'id', field_id + '_add_all_link');
-        choose_all.className = 'selector-chooseall uk-button';
+        choose_all.className = 'selector-chooseall uk-button uk-margin-top uk-button-success';
 
         // <div class="selector-chosen">
         var selector_chosen = quickElement('div', selector_div);
@@ -67,18 +67,19 @@ window.SelectFilter = {
         var title_chosen = quickElement('h2', selector_chosen, interpolate(gettext('Chosen %s') + ' ', [field_name]));
         quickElement('img', title_chosen, '', 'src', admin_static_prefix + 'img/icon-unknown.gif', 'width', '10', 'height', '10', 'class', 'help help-tooltip', 'title', interpolate(gettext('This is the list of chosen %s. You may remove some by selecting them in the box below and then clicking the "Remove" arrow between the two boxes.'), [field_name]));
 
-        var to_box = quickElement('select', selector_chosen, '', 'id', field_id + '_to', 'multiple', 'multiple', 'size', from_box.size, 'name', from_box.getAttribute('name'));
+        var to_box = quickElement('select', selector_chosen, '', 'id', field_id + '_to', 'multiple', 'multiple', 'size', from_box.size, 'name', from_box.getAttribute('name'), 'style', 'width: 100%');
         to_box.className = 'uk-panel uk-panel-box uk-panel-box-primary';
         var clear_all = quickElement('a', selector_chosen, gettext('Remove all'), 'title', interpolate(gettext('Click to remove all chosen %s at once.'), [field_name]), 'href', 'javascript: (function() { SelectBox.move_all("' + field_id + '_to", "' + field_id + '_from"); SelectFilter.refresh_icons("' + field_id + '");})()', 'id', field_id + '_remove_all_link');
-        clear_all.className = 'selector-clearall uk-button';
+        clear_all.className = 'selector-clearall uk-button uk-button-danger uk-margin-top';
 
         from_box.setAttribute('name', from_box.getAttribute('name') + '_old');
+        from_box.setAttribute('style', 'width: 100%')
 
         // <div class="selector-chooser">
         var selector_chooser = quickElement('div', selector_div);
-        selector_chooser.className = 'selector-chooser uk-button-group uk-margin-top';
+        selector_chooser.className = 'selector-chooser uk-margin-top';
         var add_link = quickElement('a', quickElement('span', selector_chooser), gettext('Choose'), 'title', gettext('Choose'), 'href', 'javascript: (function(){ SelectBox.move("' + field_id + '_from","' + field_id + '_to"); SelectFilter.refresh_icons("' + field_id + '");})()', 'id', field_id + '_add_link');
-        add_link.className = 'uk-button uk-button-primary';
+        add_link.className = 'uk-button uk-button-primary uk-margin-right';
         var remove_link = quickElement('a', quickElement('span', selector_chooser), gettext('Remove'), 'title', gettext('Remove'), 'href', 'javascript: (function(){ SelectBox.move("' + field_id + '_to","' + field_id + '_from"); SelectFilter.refresh_icons("' + field_id + '");})()', 'id', field_id + '_remove_link');
         remove_link.className = 'uk-button uk-button-primary';
 
