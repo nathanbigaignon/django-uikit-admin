@@ -1,4 +1,0 @@
-Django
-psycopg2
-requests
-django-grappelli
