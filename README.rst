@@ -2,7 +2,7 @@
 UIKIT_ADMIN
 =====
 
-Uikit_admin is a modern grid based skin for Django built-in administration.
+Uikit_admin is a modern grid based skin for Django built-in administration interface.
 
 Detailed documentation is in the "docs" directory.
 

@@ -13,7 +13,7 @@ setup(
     packages=['uikit_admin'],
     include_package_data=True,
     license='BSD License',  # example license
-    description='A modern grid based skin for Django built-in administration.',
+    description='A modern grid based skin for Django built-in administration interface.',
     long_description=README,
     url='https://github.com/epi-log/django-uikit-admin',
     author='Nathan Bigaignon, Max Prudhomme',
