@@ -1,0 +1,69 @@
+fieldset.collapsed * {
+    display: none;
+}
+
+fieldset.collapsed h2, fieldset.collapsed {
+    display: block !important;
+}
+
+fieldset.collapsed .collapse-toggle {
+    background: transparent;
+    display: inline !important;
+}
+
+fieldset.collapsed .uk-panel-title {
+    padding-bottom: 0;
+    border-bottom: none;
+    margin: 0;
+}
+
+.empty-form {
+    display: none;
+}
+
+.add-row {
+    background: none !important;
+}
+
+.add-row td {
+    border-bottom: none !important;
+}
+
+.calendarbox, .clockbox {
+    padding: 15px;
+    background: #fafafa;
+    color: #666;
+    border: 1px solid #e5e5e5;
+    border-radius: 4px;
+}
+
+.calendarbox .calendarnav-previous {
+    float: left;
+}
+
+.calendarbox .calendarnav-next {
+    float: right;
+}
+
+.calendarbox .calendar table {
+    text-align: center;
+    margin: auto;
+    border-collapse: collapse;
+}
+
+.calendarbox .calendar table, .calendarbox .calendar table caption {
+    margin-bottom: 5px;
+}
+
+.calendarbox .calendar table tbody td {
+    padding: 4px;
+}
+
+.calendarbox table tbody td, .calendarbox table tbody th {
+    border: 1px solid black;
+}
+
+.calendarbox .calendar-cancel, .clockbox .calendar-cancel {
+    margin: 0;
+    text-align: center;
+}

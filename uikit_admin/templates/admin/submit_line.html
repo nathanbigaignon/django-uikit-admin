@@ -1,0 +1,17 @@
+{% load i18n admin_urls uikit_admin %}
+<div class="uk-button-group uk-margin-top">
+{% trans 'Save' as save %}
+{% trans 'Save as new' as save_as_new %}
+{% trans 'Save and add another' as save_and_add_another %}
+{% trans 'Save and continue editing' as save_and_continue_editing %}
+{% trans 'Delete' as delete %}
+
+{% if show_save %}{% uka_button save "" "submit" "_save"  %}{% endif %}
+{% if show_save_as_new %}{% uka_button save_as_new "" "submit" "_saveasnew" %}{% endif %}
+{% if show_save_and_add_another %}{% uka_button save_and_add_another "" "submit" "_addanother" %}{% endif %}
+{% if show_save_and_continue %}{% uka_button save_and_continue_editing "" "submit" "_continue" %}{% endif %}
+{% if show_delete_link %}
+    {% url opts|admin_urlname:'delete' original.pk|admin_urlquote as delete_url %}
+    <a href="{% add_preserved_filters delete_url %}" class="uk-button uk-button-danger">{% trans "Delete" %}</a>
+{% endif %}
+</div>

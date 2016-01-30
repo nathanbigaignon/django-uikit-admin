@@ -1,0 +1,6 @@
+include LICENSE
+include README.rst
+recursive-include uikit_admin/static *
+recursive-include uikit_admin/templates *
+recursive-include uikit_admin/templatetags *
+recursive-include uikit_admin/docs *

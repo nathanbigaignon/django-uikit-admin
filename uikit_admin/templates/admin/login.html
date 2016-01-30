@@ -1,0 +1,68 @@
+{% extends "admin/base_site.html" %}
+{% load i18n admin_static uikit_admin %}
+
+{% block extrastyle %}{{ block.super }}
+    <!--<link rel="stylesheet" type="text/css" href="{% static "admin/css/login.css" %}"/>-->
+    <link rel="stylesheet" type="text/css" href="{% static "css/login.css" %}"/>
+{% endblock %}
+
+{% block bodyclass %}{{ block.super }} login{% endblock %}
+
+{% block usertools %}{% endblock %}
+
+{% block nav-global %}{% endblock %}
+
+{% block content_title %}{% endblock %}
+
+{% block breadcrumbs %}{% endblock %}
+
+{% block content %}
+    <div class="uk-grid">
+        <div class="uk-width-2-5"></div>
+        <div class="uk-width-1-5">
+
+            <div id="content-main" class="uk-margin-large-top">
+                {% if form.errors and not form.non_field_errors %}
+                    <div class="uk-alert uk-alert-danger uk-margin-large-bottom">
+                        {% if form.errors.items|length == 1 %}
+                            {% trans "Please correct the error below." %}
+                        {% else %}
+                            {% trans "Please correct the errors below." %}
+                        {% endif %}
+                    </div>
+                {% endif %}
+
+                {% if form.non_field_errors %}
+                    {% for error in form.non_field_errors %}
+                        <div class="uk-alert uk-alert-danger uk-margin-large-bottom">
+                            {{ error }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+                <form action="{{ app_path }}" method="post" id="login-form"
+                      class="uk-form uk-form-stacked">{% csrf_token %}
+
+                    {% uka_form_row_stacked form.username form.username.errors "uk-width-1-1" %}
+
+                    {% uka_form_row_stacked form.password form.password.errors "uk-width-1-1" %}
+
+                    {% url 'admin_password_reset' as password_reset_url %}
+                    {% if password_reset_url %}
+                        <div class="password-reset-link">
+                            <a href="{{ password_reset_url }}">{% trans 'Forgotten your password or username?' %}</a>
+                        </div>
+                    {% endif %}
+
+                    {% trans 'Log in' as text_log_in %}
+                    {% uka_form_row_stacked_button text_log_in "uk-width-1-1" %}
+                </form>
+
+                <script type="text/javascript">
+                    document.getElementById('id_username').focus()
+                </script>
+            </div>
+
+        </div>
+        <div class="uk-width-2-5"></div>
+    </div>
+{% endblock %}

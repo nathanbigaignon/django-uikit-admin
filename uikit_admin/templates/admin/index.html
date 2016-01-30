@@ -1,0 +1,114 @@
+{% extends "admin/base_site.html" %}
+{% load staticfiles %}
+{% load i18n admin_static %}
+
+{% block extrastyle %}{{ block.super }}
+    <link rel="stylesheet" type="text/css" href="{% static "admin/css/index.css" %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static "css/components/tooltip.min.css" %}"/>
+{% endblock %}
+
+{% block coltype %}colMS{% endblock %}
+
+{% block bodyclass %}{{ block.super }} dashboard{% endblock %}
+
+{% block breadcrumbs %}{% endblock %}
+{% block extrahead %}
+    <script src="{% static "js/jquery-2.1.4.min.js" %}"></script>
+    <script src="{% static "js/uikit.min.js" %}"></script>
+    <script src="{% static "js/components/tooltip.min.js" %}"></script>
+{% endblock %}
+
+{% block content_title %}{% endblock %}
+{% block content %}
+    <div class="uk-grid uk-margin-top">
+        <div class="uk-width-2-3">
+            {% if app_list %}
+                <div class="uk-grid">
+                    {% for app in app_list %}
+                        <div class="uk-width-1-2">
+                            <div class="uk-panel-box uk-margin-bottom">
+                                <h3 class="uk-panel-title">
+                                    <a href="{{ app.app_url }}" class="section"
+                                       title="{% blocktrans with name=app.name %}Models in the {{ name }} application{% endblocktrans %}">{{ app.name }}</a>
+                                </h3>
+
+                                <ul class="uk-list uk-list-line">
+                                    {% for model in app.models %}
+                                        <li>
+                                            <div class="uk-grid">
+                                                <div class="uk-width-1-2">
+                                                    {% if model.admin_url %}
+                                                        <a href="{{ model.admin_url }}">{{ model.name }}</a>
+                                                    {% else %}
+                                                        {{ model.name }}
+                                                    {% endif %}
+                                                </div>
+                                                <div class="uk-width-1-2">
+                                                    <div class="uk-button-group">
+                                                        {% if model.add_url %}
+                                                            <a href="{{ model.add_url }}"
+                                                               title="{% trans 'Add' %}" data-uk-tooltip
+                                                               class="uk-button"><i
+                                                                    class="uk-icon-plus uk-icon-mini"></i></a>
+                                                        {% else %}
+                                                            &nbsp;
+                                                        {% endif %}
+
+                                                        {% if model.admin_url %}
+                                                            <a href="{{ model.admin_url }}"
+                                                               title="{% trans 'Change' %}" data-uk-tooltip
+                                                               class="uk-button"><i
+                                                                    class="uk-icon-edit uk-icon-mini"></i></a>
+                                                        {% else %}
+                                                            &nbsp;
+                                                        {% endif %}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <p>{% trans "You don't have permission to edit anything." %}</p>
+            {% endif %}
+        </div>
+        <div class="uk-width-1-3">
+            <div class="uk-panel-box">
+                <h2>{% trans 'Recent Actions' %}</h2>
+
+                <h3>{% trans 'My Actions' %}</h3>
+                {% load log %}
+                {% get_admin_log 10 as admin_log for_user user %}
+                {% if not admin_log %}
+                    <p>{% trans 'None available' %}</p>
+                {% else %}
+                    <ul class="uk-list">
+                        {% for entry in admin_log %}
+                            <li>
+                                {% if entry.is_addition %}<span class="uk-icon-plus uk-text-success"></span>{% endif %}
+                                {% if entry.is_change %}<span class="uk-icon-pencil"></span>{% endif %}
+                                {% if entry.is_deletion %}<span class="uk-icon-remove uk-text-danger"></span>{% endif %}
+                                {% if entry.is_deletion or not entry.get_admin_url %}
+                                    <span class="uk-text-bold">{{ entry.object_repr }}</span>
+                                {% else %}
+                                    <a class="uk-text-bold" href="{{ entry.get_admin_url }}">{{ entry.object_repr }}</a>
+                                {% endif %}
+                                <br/>
+                                {% if entry.content_type %}
+                                    <span class="uk-text-muted">{% filter capfirst %}
+                                        {{ entry.content_type }}{% endfilter %}</span>
+                                {% else %}
+                                    <span class="uk-text-muted">{% trans 'Unknown content' %}</span>
+                                {% endif %}
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
