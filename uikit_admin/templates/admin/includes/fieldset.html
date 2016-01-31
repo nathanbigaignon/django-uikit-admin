@@ -18,6 +18,7 @@
                                     class="uk-form-help-inline">{{ field.field.label }}</span></label>
                         {% else %}
                             {% if field.is_readonly %}
+                            {{ field.label_tag }}
                             <p>{{ field.contents }}</p>
                             {% else %}
                             {% uka_form_row_stacked field.field field.field.errors "uk-form-width-large" %}
