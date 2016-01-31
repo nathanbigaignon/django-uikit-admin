@@ -1,5 +1,3 @@
-db_django_uikit_admin:
-  image: postgres
 app_django_uikit_admin:
   build: ./docker_resources/app
   command: python manage.py runserver 0.0.0.0:8000
@@ -7,5 +5,3 @@ app_django_uikit_admin:
     - .:/code
   ports:
     - "8000:8000"
-  links:
-    - db_django_uikit_admin
