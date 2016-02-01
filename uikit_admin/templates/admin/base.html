@@ -79,10 +79,11 @@
                         {% endblock %}
                     </nav>
                     <!-- off-canvas sidebar displayed on small devices only -->
-                    <nav class="uk-visible-small">
+                    <nav class="uk-navbar uk-navbar-attached uk-visible-small">
                         <!-- This is a button toggling the off-canvas sidebar -->
                         {% if user.is_active and user.is_staff %}
-                        <button class="uk-button" data-uk-offcanvas="{target:'#my-id'}"><i class="uk-icon-bars"></i></button>
+                        <a href="#my-id" data-uk-offcanvas><i class="uk-icon-bars uk-icon-medium uk-margin-left" style="color: black;"></i></a>
+                        <!--<button class="uk-button" data-uk-offcanvas="{target:'#my-id'}"><i class="uk-icon-bars"></i></button> -->
                         {% endif %}
                         <!-- This is the off-canvas sidebar -->
                         <div id="my-id" class="uk-offcanvas">
