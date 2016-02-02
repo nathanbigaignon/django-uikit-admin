@@ -59,7 +59,7 @@ window.SelectFilter = {
 
         selector_available.appendChild(from_box);
         var choose_all = quickElement('a', selector_available, gettext('Choose all'), 'title', interpolate(gettext('Click to choose all %s at once.'), [field_name]), 'href', 'javascript: (function(){ SelectBox.move_all("' + field_id + '_from", "' + field_id + '_to"); SelectFilter.refresh_icons("' + field_id + '");})()', 'id', field_id + '_add_all_link');
-        choose_all.className = 'selector-chooseall uk-button uk-margin-top uk-button-success';
+        choose_all.className = 'selector-chooseall uk-button uk-margin-top uk-button-primary';
 
         // <div class="selector-chosen">
         var selector_chosen = quickElement('div', selector_div);
